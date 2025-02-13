@@ -81,10 +81,6 @@ M.show = function(line)
                     offset = 0
                 end
 
-                if config.manual_position and i == str_length then
-                    key = config.end_key
-                end
-
                 table.insert(
                     list_pos,
                     { col = i + offset, key = key, char = char, pos = i }
@@ -93,21 +89,13 @@ M.show = function(line)
         end
         log.debug(list_pos)
 
-        local end_col, end_pos
-        if config.manual_position then
-            end_col = str_length + offset
-            end_pos = str_length
-        else
-            end_col = str_length + 1
-            end_pos = str_length + 1
-        end
+        local end_col = str_length + 1
+        local end_pos = str_length + 1
         -- add end_key to list extmark
-        if #list_pos == 0 or list_pos[#list_pos].key ~= config.end_key then
-            table.insert(
-                list_pos,
-                { col = end_col, key = config.end_key, pos = end_pos, char = config.end_key }
-            )
-        end
+        table.insert(
+            list_pos,
+            { col = end_col, key = config.end_key, pos = end_pos, char = config.end_key }
+        )
 
         -- Create a whitespace string for the current line which replaces every non whitespace
         -- character with a space and preserves tabs, so we can use it for highlighting with
