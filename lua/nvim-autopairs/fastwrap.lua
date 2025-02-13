@@ -89,7 +89,7 @@ M.show = function(line)
         end
         log.debug(list_pos)
 
-        local end_col = str_length + 1
+        local end_col = str_length
         local end_pos = str_length + 1
         -- add end_key to list extmark
         table.insert(
@@ -115,7 +115,7 @@ M.show = function(line)
                     vim.print("Run to end!")
                     -- M.highlight_wrap({pos = pos.pos, key = config.end_key}, row, col, #line, whitespace_line)
                     local move_end_key = (not config.avoid_move_to_end and char == string.upper(config.end_key))
-                    M.move_bracket(line, pos.col+1, end_pair, move_end_key)
+                    M.move_bracket(line, pos.col, end_pair, move_end_key)
                     break
                 end
                 local hl_mark = {
